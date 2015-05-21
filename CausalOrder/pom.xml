@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.brann</groupId>
   <artifactId>CausalOrder</artifactId>
-  <version>1.0.0-RELEASE</version>
+  <version>1.0.0-SNAPSHOT</version>
   <name>SES Protocol</name>
   <description>Causal Ordering of point-to-point messages</description>
   <dependencies>
@@ -40,4 +40,11 @@
       <url>http://repo.maven.apache.org/maven2</url>
     </pluginRepository>
   </pluginRepositories>
+  <distributionManagement>
+    <snapshotRepository>
+        <id>ndmLabArt</id>
+        <name>ndmLabArt-snapshots</name>
+        <url>http://172.27.48.8:8081/artifactory/ext-snapshot-local</url>
+    </snapshotRepository>
+</distributionManagement>
 </project>
