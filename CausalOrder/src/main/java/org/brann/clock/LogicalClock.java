@@ -172,7 +172,7 @@ public class LogicalClock extends ClockOperations implements Serializable, Clone
     }
     
     public boolean isLessThan (LogicalClock other) {
-        return this.isLessThan((ClockOperations)other);
+        return this.lessThan((ClockOperations)other);
     }
         
     

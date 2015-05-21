@@ -336,6 +336,7 @@ public class TestAllCausalOrder {
 		assertTrue(p3.inCausalOrder(p3copy));
 		assertTrue(p3copy.inCausalOrder(p3));
 		
+		String json = p1.toString();
 	}
 
 }
