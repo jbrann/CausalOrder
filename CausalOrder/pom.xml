@@ -1,50 +1,63 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.brann</groupId>
-  <artifactId>CausalOrder</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
-  <name>SES Protocol</name>
-  <description>Causal Ordering of point-to-point messages</description>
-  <dependencies>
-  	<dependency>
-  		<groupId>com.fasterxml.jackson.core</groupId>
-  		<artifactId>jackson-core</artifactId>
-  		<version>2.5.3</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>junit</groupId>
-  		<artifactId>junit</artifactId>
-  		<version>4.11</version>
-  	</dependency>
-  </dependencies>
-  <repositories>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>Central Repository</name>
-      <url>http://172.27.48.8:8081/artifactory/libs-release</url>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <releases>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>Central Repository</name>
-      <url>http://repo.maven.apache.org/maven2</url>
-    </pluginRepository>
-  </pluginRepositories>
-  <distributionManagement>
-    <snapshotRepository>
-        <id>ndmLabArt</id>
-        <name>ndmLabArt-snapshots</name>
-        <url>http://172.27.48.8:8081/artifactory/ext-snapshot-local</url>
-    </snapshotRepository>
-</distributionManagement>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.brann</groupId>
+	<artifactId>CausalOrder</artifactId>
+	<version>1.0.1-SNAPSHOT</version>
+	<name>SES Protocol</name>
+	<description>Causal Ordering of point-to-point messages</description>
+	<dependencies>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+	</dependencies>
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>http://172.27.48.8:8081/artifactory/libs-release</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>http://172.27.48.8:8081/artifactory/plugins-release</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>snapshots</id>
+			<url>http://172.27.48.8:8081/artifactory/plugins-snapshot</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+	<distributionManagement>
+		<repository>
+			<id>ndmLabArtRel</id>
+			<name>ndmLabArt-releases</name>
+			<url>http://172.27.48.8:8081/artifactory/ext-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>ndmLabArtSnap</id>
+			<name>ndmLabArt-snapshots</name>
+			<url>http://172.27.48.8:8081/artifactory/ext-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
