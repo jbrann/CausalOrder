@@ -44,8 +44,8 @@ public class Testbed {
                         multiTo = new String[srt.countTokens()];
                         for (int numdests = 0;
                             srt.hasMoreTokens();
-                            ++numdests)
-                                multiTo[numdests] = srt.nextToken();
+                            )
+                                multiTo[numdests++] = srt.nextToken();
                         to = null;
                     }
                     else
