@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.brann</groupId>
 	<artifactId>CausalOrder</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.2-RELEASE</version>
 	<name>SES Protocol</name>
 	<description>Causal Ordering of point-to-point messages</description>
 	<dependencies>
