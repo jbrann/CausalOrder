@@ -159,6 +159,12 @@ public class VectorTimeStamp implements Serializable {
         stamp.put(other, (VectorClock)myclock.clone());
     }
     
+    /**
+     * Multicast extension - set sender's clock in the various receiver vector clocks (so the multicast
+     * receivers are updated for each other's reception of the message)
+     * 
+     * @param senderClock
+     */
     public synchronized void setForSender(VectorTimeStamp senderClock) {
         myclock.setClockFor (senderClock.owner, 
                 senderClock.myclock.clockFor(senderClock.owner));

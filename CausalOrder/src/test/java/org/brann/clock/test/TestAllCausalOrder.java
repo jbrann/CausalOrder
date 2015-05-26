@@ -332,9 +332,9 @@ public class TestAllCausalOrder {
 		
 		// now round-trip the p3 clock to show the JSON works
 		
-		VectorTimeStamp p3copy = new VectorTimeStamp(null, p3.toString());
-		assertTrue(p3.inCausalOrder(p3copy));
-		assertTrue(p3copy.inCausalOrder(p3));
+		VectorTimeStamp p2copy = new VectorTimeStamp(null, p2.toString());
+		assertTrue(p2.inCausalOrder(p2copy));
+		assertTrue(p2copy.inCausalOrder(p2));
 		
 		String json = p1.toString();
 	}
