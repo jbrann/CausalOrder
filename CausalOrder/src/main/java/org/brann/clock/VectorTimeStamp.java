@@ -71,7 +71,7 @@ public class VectorTimeStamp implements Serializable {
     	
     	try {
 			JsonGenerator jg = new JsonFactory().createGenerator(sw);
-	//		jg.setPrettyPrinter(new DefaultPrettyPrinter());
+			jg.setPrettyPrinter(new DefaultPrettyPrinter());
 			
 			jg.writeStartObject();
 			

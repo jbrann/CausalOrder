@@ -179,7 +179,7 @@ public class VectorClock extends ClockOperations implements Serializable, Clonea
     	
     	try {
 			JsonGenerator jg = new JsonFactory().createGenerator(sw);
-	//		jg.setPrettyPrinter(new DefaultPrettyPrinter());
+			jg.setPrettyPrinter(new DefaultPrettyPrinter());
 			
 			jg.writeStartObject();
 			
