@@ -306,10 +306,11 @@ public class VectorTimeStamp implements Serializable {
 		}
     	
     	// correct ownership if the argument owner does not match the restored stamp
+    	// clock for owner must be "zero'd"
     	
     	if (name != null) {
     		owner = name;
-        	myclock = new VectorClock(name);
+    	    myclock = new VectorClock();
     	}
     		    	
     }

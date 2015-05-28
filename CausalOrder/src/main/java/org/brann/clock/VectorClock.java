@@ -36,7 +36,7 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 
 public class VectorClock extends ClockOperations implements Serializable, Cloneable {
     
-    protected VectorClock() { // used in clone();
+    protected VectorClock() { // used in clone()
     	
     }
     
