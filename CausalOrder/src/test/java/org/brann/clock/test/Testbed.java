@@ -13,6 +13,8 @@ public class Testbed {
         HashMap messages = new HashMap();
 
 
+        long b4 = System.currentTimeMillis();
+        
         if (args.length < 1)
             System.out.println ("Usage: <program> file");
 
@@ -134,6 +136,7 @@ public class Testbed {
         
         catch (Exception e) {System.out.println (e); e.printStackTrace();}
         
+        System.out.println ("\n\nTime to complete tests: " + (System.currentTimeMillis()-b4) + "\n\n");
         // check round-trip of time stamps through string
         
         for (Iterator it = processes.keySet().iterator();
