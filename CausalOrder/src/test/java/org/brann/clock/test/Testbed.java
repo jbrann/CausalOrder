@@ -17,6 +17,7 @@ public class Testbed {
         
         if (args.length < 1)
             System.out.println ("Usage: <program> file");
+            System.exit(1);
 
         try {
 	    FileReader fr = new FileReader(args[0]);
