@@ -20,6 +20,8 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
  * the array is "BigEndian" - the highest index to the array is the lowest
  * value.
  * 
+ * add lines to get a change
+ * 
  * @author John Brann
  */
 @SuppressWarnings("serial")
