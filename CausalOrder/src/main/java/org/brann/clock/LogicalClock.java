@@ -25,6 +25,10 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 @SuppressWarnings("serial")
 public class LogicalClock extends ClockOperations implements Serializable,
 		Cloneable {
+
+	/** the 'digits' */
+	private int[] value;
+
 	/**
 	 * Creates an uninitialized value.
 	 */
@@ -147,6 +151,7 @@ public class LogicalClock extends ClockOperations implements Serializable,
 	/**
 	 * tick the value, expanding the number of 'digits' as necessary.
 	 */
+	@Override
 	protected void doTick() {
 
 		int counter;
@@ -179,6 +184,7 @@ public class LogicalClock extends ClockOperations implements Serializable,
 	 * 
 	 * @returns true if this is less than the argument, false otherwise.
 	 */
+	@Override
 	protected boolean isLessThan(ClockOperations other) {
 
 		boolean result = false;
@@ -201,11 +207,9 @@ public class LogicalClock extends ClockOperations implements Serializable,
 		return result;
 	}
 
+	@Override
 	protected Object clone() {
 		return new LogicalClock(this);
 	}
-
-	/** the 'digits' */
-	private int[] value;
 
 }
