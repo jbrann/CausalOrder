@@ -15,10 +15,11 @@ public class Testbed {
 
         long b4 = System.currentTimeMillis();
         
-        if (args.length < 1)
+        if (args.length < 1) {
             System.out.println ("Usage: <program> file");
             System.exit(1);
-
+        }
+        
         try {
 	    FileReader fr = new FileReader(args[0]);
     	    BufferedReader br = new BufferedReader(fr);
@@ -145,7 +146,7 @@ public class Testbed {
         	String processName = (String) it.next(); 
         	String stringStamp = (processes.get(processName)).getClock().toString();
         	System.out.println (processName + " " + stringStamp);
-        	System.out.println (processName + " " + new VectorTimeStamp(processName, stringStamp).toString() + "\n");
+        	System.out.println (processName + " " + new VectorTimeStamp(null, stringStamp).toString() + "\n");
         	
         }
 

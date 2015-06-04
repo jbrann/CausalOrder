@@ -241,7 +241,7 @@ public class VectorTimeStamp implements Serializable {
 		while (jp.nextToken() != JsonToken.END_OBJECT) { // first pass moves past start of object
 
 			if (jp.getCurrentName().compareTo(TextConstants.OWNER_PROCESS_ID) != 0)
-				throw new JsonParseException("Unexpected field name: "+jp.getCurrentName()+" should be: "+ TextConstants.LAMPORT_LOGICAL_CLOCK, 
+				throw new JsonParseException("Unexpected field name: "+jp.getCurrentName()+" should be: "+ TextConstants.OWNER_PROCESS_ID, 
 						jp.getCurrentLocation());
 			jp.nextToken();
 			owner = jp.getText();
@@ -251,7 +251,7 @@ public class VectorTimeStamp implements Serializable {
 			myclock.fromJson(jp);
 			
 			if (jp.getCurrentName().compareTo(TextConstants.FOREIGN_CLOCKS) != 0)
-				throw new JsonParseException("Unexpected field name: "+jp.getCurrentName()+" should be: "+ TextConstants.LAMPORT_LOGICAL_CLOCK, 
+				throw new JsonParseException("Unexpected field name: "+jp.getCurrentName()+" should be: "+ TextConstants.FOREIGN_CLOCKS, 
 						jp.getCurrentLocation());
 			jp.nextToken();
 						

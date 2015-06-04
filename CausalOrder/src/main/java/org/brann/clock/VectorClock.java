@@ -56,7 +56,7 @@ public class VectorClock extends ClockOperations implements Serializable, Clonea
     	
 
 		if (jp.getCurrentName().compareTo(TextConstants.VECTOR_CLOCK) != 0)
-			throw new JsonParseException("Unexpected field name: "+jp.getCurrentName()+" should be: "+ TextConstants.LAMPORT_LOGICAL_CLOCK, 
+			throw new JsonParseException("Unexpected field name: "+jp.getCurrentName()+" should be: "+ TextConstants.VECTOR_CLOCK, 
 					jp.getCurrentLocation());
 		
 		for (jp.nextToken(); // start of Array;
@@ -65,7 +65,7 @@ public class VectorClock extends ClockOperations implements Serializable, Clonea
 			jp.nextToken(); // past start object
 			
 			if (jp.getCurrentName().compareTo(TextConstants.PROCESS_ID) != 0)
-				throw new JsonParseException("Unexpected field name: "+jp.getCurrentName()+" should be: "+ TextConstants.LAMPORT_LOGICAL_CLOCK, 
+				throw new JsonParseException("Unexpected field name: "+jp.getCurrentName()+" should be: "+ TextConstants.PROCESS_ID, 
 						jp.getCurrentLocation());
 			
 			jp.nextToken(); //move to pid name
