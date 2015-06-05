@@ -187872,7 +187872,6 @@ Process <P3> received the following messages:
 	msg2,3
 
 
-Time to complete tests: 31399
 
 
 P1 {
