@@ -16,7 +16,7 @@ public class CausallyOrderedMessage implements Serializable {
      * @see org.brann.clock.VectorTimeStamp
      * @return The timestamp of the message*/
     public VectorTimeStamp getTimestamp() {
-        return timestamp;
+        return new VectorTimeStamp(null, timestamp);
     }
 
     /**
@@ -31,11 +31,11 @@ public class CausallyOrderedMessage implements Serializable {
      * @param The message payload
      * @param The timestamp of the process creating the message 
      */
-    protected CausallyOrderedMessage(Object payload, VectorTimeStamp clock) {
-        timestamp = new VectorTimeStamp(clock);
+    protected CausallyOrderedMessage(Object payload, String clock) {
+        timestamp = clock;
         this.payload = payload;
     }
 
     private Object payload;
-    private VectorTimeStamp timestamp;
+    private String timestamp;
 }

@@ -101,7 +101,7 @@ public class CausallyOrderedMsgHandler {
         
         synchronized (clock) {
             
-            result = new CausallyOrderedMessage(payload, clock);
+            result = new CausallyOrderedMessage(payload, clock.toString());
             clock.insertClockFor(destn);
             clock.tick();
         }
@@ -132,7 +132,7 @@ public class CausallyOrderedMsgHandler {
                         if (dests!= inloop)
                            tmp.insertClockFor(destn[inloop]);
 
-                    result[dests] = new CausallyOrderedMessage (payload, tmp);
+                    result[dests] = new CausallyOrderedMessage (payload, tmp.toString());
             }
             for (int dests = 0;
                  dests < destn.length;
