@@ -157,7 +157,6 @@ public class LogicalClock extends ClockOperations implements Serializable,
 	protected void doTick() {
 
 		int counter;
-		boolean done;
 
 		for (counter = value.length - 1; counter >= 0; --counter) {
 
@@ -171,7 +170,7 @@ public class LogicalClock extends ClockOperations implements Serializable,
 		}
 
 		// total overflow, add a 'digit'
-		int newval[] = new int[value.length + 1];
+		int[] newval = new int[value.length + 1];
 		newval[0] = 1;
 		value = newval;
 	}
@@ -191,24 +190,28 @@ public class LogicalClock extends ClockOperations implements Serializable,
 
 		boolean result = false;
 
-		if (this.value.length < ((LogicalClock) other).value.length) {
-			result = true;
-		} else {
-			if (this.value.length == ((LogicalClock) other).value.length) {
+		if (this.value.length == ((LogicalClock) other).value.length) {
 
-				for (int counter = 0; counter < this.value.length; ++counter) {
-					if (this.value[counter] < ((LogicalClock) other).value[counter]) {
-						result = true;
-						break;
-					} else if (this.value[counter] > ((LogicalClock) other).value[counter]) {
-						break;
-					}
+			// if lengths are the same, work from the high-value down, testing each
+			for (int counter = 0; counter < this.value.length; ++counter) {
+				if (this.value[counter] != ((LogicalClock) other).value[counter]) {
+					result = (this.value[counter] < ((LogicalClock) other).value[counter]);
+					break;
 				}
 			}
+		} else if (this.value.length < ((LogicalClock) other).value.length) {
+			// if this is shorter, it's smaller
+			result = true;
+		} else {
+			// if this is longer, it's larger
+			result = false;
 		}
 		return result;
 	}
 
+	/**
+	 * provide deep clone() used in merging algorithm.
+	 */
 	@Override
 	protected Object clone() {
 		return new LogicalClock(this);
