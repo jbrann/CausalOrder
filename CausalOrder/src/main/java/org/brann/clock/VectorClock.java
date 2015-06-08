@@ -171,6 +171,7 @@ public class VectorClock extends ClockOperations implements Serializable, Clonea
      * format is:  {"VC":[{"PID":<process id>,<Logical Clock>},...]}
      * 
      */
+    @Override
     public String toString() {
     	
     	StringWriter sw = new StringWriter();
@@ -201,6 +202,7 @@ public class VectorClock extends ClockOperations implements Serializable, Clonea
      * Create a new, separate copy of the Vector Clock, identical to the
      * original
      */
+    @Override
     public Object clone() {
         String wknm;
         
@@ -234,7 +236,16 @@ public class VectorClock extends ClockOperations implements Serializable, Clonea
         
         return this.lessThan((ClockOperations) other);
     }
-        
+     
+    /**
+     * Determine if the argument Vectore Clock is "Less than" this one
+     * 
+     * In order for THIS Vector Clock to be less than another, all of the following must be true:
+     * for every Logical Clock in common, none of the clocks in THIS vector can be greater than its counterpart
+     * for every Logical Clock in common, at least one in THIS must be less than its counterpart
+     * for every Logical Clock in THIS but absent from the other, the value in THIS must be zero.
+     */
+    @Override
     protected boolean isLessThan(ClockOperations other) {
         
         LogicalClock wk;

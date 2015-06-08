@@ -5,6 +5,7 @@ package org.brann.message;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
+
 import org.brann.clock.VectorTimeStamp;
 
 /**
@@ -18,7 +19,14 @@ import org.brann.clock.VectorTimeStamp;
  */
 public class CausallyOrderedMsgHandler {
 
-    /**
+    private String name;
+	public String getName() {
+		return name;
+	}
+
+	private LinkedList<CausallyOrderedMessage> heldMessages;
+	private VectorTimeStamp clock;
+	/**
      * Buffer an out-of-order message 
      */
     private void holdMessage(CausallyOrderedMessage msg) {
@@ -29,14 +37,14 @@ public class CausallyOrderedMsgHandler {
      * Check a message received from the transport for causal order.
      * If in order check for buffered messages that can now be delivered.
      * @param received message with timestamp
-     * @return Vector of messages that can now be processed (null if parameter message is out of order) 
+     * @return Vector of message payloads that can now be processed (null if parameter message is out of order) 
      */
-    public List recvMessage(CausallyOrderedMessage msg) {
-        LinkedList results = null;
+    public List<Object> recvMessage(CausallyOrderedMessage msg) {
+        LinkedList<Object> results = null;
         
         if (checkOrderAndReceive(msg)) {
             
-            results = new LinkedList();
+            results = new LinkedList<Object>();
             results.add(msg.getPayload());
             if (heldMessages.size() > 0) {
                 results.addAll(scanHeld());
@@ -49,11 +57,13 @@ public class CausallyOrderedMsgHandler {
 
     private boolean checkOrderAndReceive(CausallyOrderedMessage msg) {
         
-        if (clock.inCausalOrder(msg.getTimestamp())) {
+    	VectorTimeStamp fromMsg = new VectorTimeStamp(null, msg.getTimestamp());
+    	
+        if (clock.inCausalOrder(fromMsg)) {
 
             synchronized (clock) {
-                clock.mergeLocal(msg.getTimestamp());
-                clock.mergeOther(msg.getTimestamp());
+                clock.mergeLocal(fromMsg);
+                clock.mergeOther(fromMsg);
                 clock.tick();
             }
             return true;
@@ -66,14 +76,14 @@ public class CausallyOrderedMsgHandler {
      * iterate over held messages, releasing those that are freed up by 
      * previously received messages.
      */
-    private List scanHeld() {
+    private List<Object> scanHeld() {
         
-        LinkedList delivered = new LinkedList();
+        LinkedList<Object> delivered = new LinkedList<Object>();
         boolean deliveredThisPass;
         
         do {
             deliveredThisPass = false;
-            for (ListIterator lIt = heldMessages.listIterator();
+            for (ListIterator<CausallyOrderedMessage> lIt = heldMessages.listIterator();
                  lIt.hasNext();) {
 
                 CausallyOrderedMessage next = (CausallyOrderedMessage)lIt.next();
@@ -151,14 +161,11 @@ public class CausallyOrderedMsgHandler {
      */
     public CausallyOrderedMsgHandler(String name) {
         this.name = name;
-        heldMessages = new LinkedList();
+        heldMessages = new LinkedList<CausallyOrderedMessage>();
         clock = new VectorTimeStamp(name);
     }
 
-    private String name;
-    private LinkedList heldMessages;
-    private VectorTimeStamp clock;
-	public VectorTimeStamp getClock() {
+    public VectorTimeStamp getClock() {
 		return clock;
 	}
 }

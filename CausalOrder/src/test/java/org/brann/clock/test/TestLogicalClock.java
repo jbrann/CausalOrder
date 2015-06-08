@@ -7,9 +7,7 @@ import static org.junit.Assert.*;
 
 import org.brann.clock.LogicalClock;
 import org.brann.clock.TextConstants;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 /**
  * @author f400670

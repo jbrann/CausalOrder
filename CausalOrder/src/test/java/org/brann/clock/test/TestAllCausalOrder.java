@@ -330,13 +330,12 @@ public class TestAllCausalOrder {
 		p3.mergeOther(p2p3);
 		p3.tick();
 		
-		// now round-trip the p3 clock to show the JSON works
+		// now round-trip the p2 clock to show the JSON works
 		
 		VectorTimeStamp p2copy = new VectorTimeStamp(null, p2.toString());
 		assertTrue(p2.inCausalOrder(p2copy));
 		assertTrue(p2copy.inCausalOrder(p2));
 		
-		String json = p1.toString();
 	}
 
 }
