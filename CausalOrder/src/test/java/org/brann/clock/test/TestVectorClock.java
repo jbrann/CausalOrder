@@ -67,7 +67,7 @@ public class TestVectorClock {
 	private VectorClock initVc() {
 		VectorClock foo = new VectorClock ("{\""+
         		TextConstants.VECTOR_CLOCK+"\":[{\""+TextConstants.PROCESS_ID+"\":\"foo\",\""+
-        		TextConstants.LAMPORT_LOGICAL_CLOCK+"\":[1]}]}");
+        		TextConstants.LAMPORT_LOGICAL_CLOCK+"\":[1,0]}]}");
 		return foo;
 	}
 
