@@ -159,6 +159,7 @@
 											<arg
 												line="-c CausalOrderSuite?suite&amp;amp;format=text" />
 											<arg line="-d ." />
+											<arg line="-b FitnesseOp.html" />
 										</java>
 									</tasks>
 								</configuration>
