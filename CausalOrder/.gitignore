@@ -1,1 +1,6 @@
 /target/
+/aFile.txt
+/bFile.txt
+/cFile.txt
+/dependency-reduced-pom.xml
+/dFile.txt

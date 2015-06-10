@@ -188,7 +188,6 @@ public class VectorClock extends ClockOperations implements Serializable, Clonea
 			jg.flush();
 			jg.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}    	
 
