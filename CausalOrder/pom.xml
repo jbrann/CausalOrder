@@ -154,7 +154,7 @@
 									<tasks>
 										<echo taskname="fitnesse" message="Starting FitNesse..." />
 										<java classname="fitnesseMain.FitNesseMain" classpathref="maven.runtime.classpath"
-											fork="true" failonerror="true">
+											fork="true" failonerror="false">
 											<arg line="-p 8001" />
 											<arg
 												line="-c CausalOrderSuite?suite&amp;amp;format=text" />
