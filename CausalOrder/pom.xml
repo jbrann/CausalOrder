@@ -159,7 +159,7 @@
 											<arg
 												line="-c CausalOrderSuite?suite&amp;amp;format=text" />
 											<arg line="-d ." />
-											<arg line="-b FitnesseOp.xml" />
+											<arg line="-b FitnesseOp.html" />
 										</java>
 									</tasks>
 								</configuration>
@@ -176,7 +176,7 @@
 					<groupId>org.fitnesse.plugins</groupId>
 					<artifactId>maven-classpath-plugin</artifactId>
 					<version>1.6</version>
-					<scope>runtime</scope>
+					<scope>compile</scope>
 				</dependency>
 			</dependencies>
 		</profile>
