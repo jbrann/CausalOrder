@@ -1,0 +1,15 @@
+!define TEST_SYSTEM {slim}
+!define COLLAPSE_SETUP {true}
+!define COLLAPSE_TEARDOWN {true}
+
+!pomFile pom.xml
+
+|import|
+|org.brann.clock|
+|org.brann.clock.fixtures|
+
+
+!| LogicalClockSlimFix |
+| Clock |
+| foo |
+| bar |
