@@ -2,7 +2,7 @@
 !define COLLAPSE_SETUP {true}
 !define COLLAPSE_TEARDOWN {true}
 
-!pomFile pom.xml
+!pomFile CausalOrder/pom.xml
 
 |import|
 |org.brann.clock|
