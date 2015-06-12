@@ -83,11 +83,14 @@ public class TestLogicalClock {
 		assertFalse(a.isLessThan(b));
 		assertTrue(b.isLessThan(a));
 		
-		a = new LogicalClock("not good json");
+		/*  using bad JSON is the equivalent of creating an un-initialized clock */
+		a = new LogicalClock("{\""+TextConstants.VECTOR_CLOCK+"\":["+Integer.MAX_VALUE+","+Integer.MAX_VALUE+"]}");
 		b = new LogicalClock();
 		
 		assertFalse(a.isLessThan(b));
 		assertFalse(b.isLessThan(a));
+		
+		
 		
 		
 	}
