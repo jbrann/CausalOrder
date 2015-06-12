@@ -41,11 +41,9 @@ public class VectorTimeStamp implements Serializable {
 		jg.writeFieldName(TextConstants.FOREIGN_CLOCKS);
 		jg.writeStartArray();
 		
-        for (Iterator<String> it = stamp.keySet().iterator();
-        		it.hasNext();) {
+		for (String clockOwner : stamp.keySet()) {
         	jg.writeStartObject();
         	
-        	String clockOwner = it.next();
         	jg.writeStringField(TextConstants.PROCESS_ID, clockOwner);
         	
         	stamp.get(clockOwner).toJson(jg);
@@ -295,12 +293,10 @@ public class VectorTimeStamp implements Serializable {
 			fromJson(jp);
 		
 			jp.close();
-		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// can't happen in Stringreader - create null stamp
+			stamp = new HashMap<String, VectorClock>();
+			myclock = new VectorClock();
 		}
     	
     	// correct ownership if the argument owner does not match the restored stamp

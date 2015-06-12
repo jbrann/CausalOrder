@@ -66,11 +66,58 @@ public class TestVectorTimeStamp {
 		p3.mergeOther(p2p3);
 		p3.tick();
 		
-		// now round-trip the p3 clock to show the JSON works
+		// now round-trip the p2 clock to show the JSON works
 		
-		VectorTimeStamp p3copy = new VectorTimeStamp(null, p3.toString());
-		assertTrue(p3.inCausalOrder(p3copy));
-		assertTrue(p3copy.inCausalOrder(p3));
+		VectorTimeStamp p2copy = new VectorTimeStamp(null, p2.toString());
+		assertTrue(p2.inCausalOrder(p2copy));
+		assertTrue(p2copy.inCausalOrder(p2));
+		
+	}
+	
+	/**
+	 * Test method for {@link org.brann.clock.VectorTimeStamp#VectorTimeStamp(String, String)}.
+	 * to test various failure scenarios when rebuilding from JSON
+	 */
+	@Test
+	public void testVectorTimeStampString() {
+		
+		VectorTimeStamp empty = new VectorTimeStamp("empty");
+		
+		VectorTimeStamp a = new VectorTimeStamp(null, "{\"O_PID\" : \"p2\",\"VC\" : [ {\"PID\" : \"p1\",\"LLC\" : [ 1 ]" +
+				  "}, {\"PID\" : \"p2\",\"LLC\" : [ 2 ]} ],\"FC\" : [ {\"PID\" : \"p3\",\"VC\" : [ {\"PID\" : \"p1\"," +
+				  "\"LLC\" : [ 1 ]}, {\"PID\" : \"p2\",\"LLC\" : [ 1 ]} ]} ]}");
+
+		VectorTimeStamp b = new VectorTimeStamp(null, "{\"O_PID\" : \"p2\",\"VC\" : [ {\"PID\" : \"p1\",\"LLC\" : [ 1 ]" +
+				  "}, {\"PID\" : \"p2\",\"LLC\" : [ 2 ]} ],\"FC\" : [ {\"PID\" : \"p3\",\"VC\" : [ {\"PID\" : \"p1\"," +
+				  "\"LLC\" : [ 1 ]}, {\"PID\" : \"p2\",\"LLC\" : [ 1 ]} ]} ]}");
+
+		// identical Vector timeStamps are in order (whichever order is tested)
+		assertTrue(a.inCausalOrder(b));
+		assertTrue(b.inCausalOrder(a));
+		
+		// exercise bad string content cases for:
+		// O_PID, FC and PID
+		
+		a = new VectorTimeStamp(null, "{\"XXXX\" : \"p2\",\"VC\" : [ {\"PID\" : \"p1\",\"LLC\" : [ 1 ]" +
+				  "}, {\"PID\" : \"p2\",\"LLC\" : [ 2 ]} ],\"FC\" : [ {\"PID\" : \"p3\",\"VC\" : [ {\"PID\" : \"p1\"," +
+				  "\"LLC\" : [ 1 ]}, {\"PID\" : \"p2\",\"LLC\" : [ 1 ]} ]} ]}");
+		
+		assertTrue(a.inCausalOrder(empty));
+		assertTrue(empty.inCausalOrder(a));
+		
+		a = new VectorTimeStamp(null, "{\"O_PID\" : \"p2\",\"VC\" : [ {\"PID\" : \"p1\",\"LLC\" : [ 1 ]" +
+				  "}, {\"PID\" : \"p2\",\"LLC\" : [ 2 ]} ],\"XXXX\" : [ {\"PID\" : \"p3\",\"VC\" : [ {\"PID\" : \"p1\"," +
+				  "\"LLC\" : [ 1 ]}, {\"PID\" : \"p2\",\"LLC\" : [ 1 ]} ]} ]}");	
+
+		assertTrue(a.inCausalOrder(empty));
+		assertTrue(empty.inCausalOrder(a));
+		
+		a = new VectorTimeStamp(null, "{\"O_PID\" : \"p2\",\"VC\" : [ {\"PID\" : \"p1\",\"LLC\" : [ 1 ]" +
+				  "}, {\"PID\" : \"p2\",\"LLC\" : [ 2 ]} ],\"FC\" : [ {\"XXXX\" : \"p3\",\"VC\" : [ {\"PID\" : \"p1\"," +
+				  "\"LLC\" : [ 1 ]}, {\"PID\" : \"p2\",\"LLC\" : [ 1 ]} ]} ]}");
+
+		assertTrue(a.inCausalOrder(empty));
+		assertTrue(empty.inCausalOrder(a));
 		
 	}
 
