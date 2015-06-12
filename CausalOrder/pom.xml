@@ -198,7 +198,7 @@
 										<java classname="fitnesseMain.FitNesseMain" classpathref="maven.runtime.classpath"
 											fork="true" failonerror="false">
 											<arg line="-p 8001" />
-											<arg line="-c CausalOrderSuite?test&amp;format=xml" />
+											<arg line="-c CausalOrderSuite?suite&amp;format=xml" />
 											<arg line="-d ." />
 											<arg line="-b fitnesse-report.xml" />
 										</java>
