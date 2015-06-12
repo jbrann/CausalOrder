@@ -128,7 +128,7 @@ public class VectorClock extends ClockOperations implements Serializable, Clonea
             if (!clocks.containsKey(nm) ||
                 ((LogicalClock)clocks.get(nm)).isLessThan(
                 		(LogicalClock)other.clocks.get(nm))) {
-                    clocks.put(nm, (LogicalClock) (other.clocks.get(nm)).clone());
+                    clocks.put(nm, new LogicalClock (other.clocks.get(nm)));
             }
         }
     }
@@ -138,7 +138,7 @@ public class VectorClock extends ClockOperations implements Serializable, Clonea
     }
     
     protected synchronized void setClockFor (String name, LogicalClock clock) {
-        clocks.put (name, (LogicalClock) clock.clone());
+        clocks.put (name,  new LogicalClock(clock));
     }
     
      /**
@@ -211,8 +211,7 @@ public class VectorClock extends ClockOperations implements Serializable, Clonea
              myIt.hasNext();) {
             
             wknm = myIt.next();
-            temp.clocks.put(wknm,
-            (LogicalClock) ((LogicalClock)this.clocks.get(wknm)).clone());
+            temp.clocks.put(wknm, new LogicalClock(this.clocks.get(wknm)));
         }
         return temp;
     }

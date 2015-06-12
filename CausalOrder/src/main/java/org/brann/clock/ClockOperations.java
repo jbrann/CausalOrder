@@ -11,7 +11,7 @@ package org.brann.clock;
  * @author  jbrann
  */
 @SuppressWarnings("serial")
-abstract class ClockOperations implements java.io.Serializable, Cloneable {
+abstract class ClockOperations implements java.io.Serializable {
     
     private static final Object emergencyLock = new Object();
     

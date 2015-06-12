@@ -25,8 +25,7 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
  * @author John Brann
  */
 @SuppressWarnings("serial")
-public class LogicalClock extends ClockOperations implements Serializable,
-		Cloneable {
+public class LogicalClock extends ClockOperations implements Serializable {
 
 	/** the 'digits' */
 	private int[] value;
@@ -207,14 +206,6 @@ public class LogicalClock extends ClockOperations implements Serializable,
 			result = false;
 		}
 		return result;
-	}
-
-	/**
-	 * provide deep clone() used in merging algorithm.
-	 */
-	@Override
-	protected Object clone() {
-		return new LogicalClock(this);
 	}
 
 }
