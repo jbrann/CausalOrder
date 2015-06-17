@@ -157,11 +157,15 @@ public class VectorTimeStamp implements Serializable {
 
         for (String wknm : other.stamp.keySet()) {
              
+        	// ignore foreign clocks referring to this process
              if (wknm.compareTo(owner) != 0) {
                 if (stamp.containsKey(wknm)) {
+                	// my clock contains a vector corresponding to this one in the foreign clock
+                	// merge the vectors
                     stamp.get(wknm).merge(other.stamp.get(wknm));
-                        // received clock for a process is less than my own - do nothing
                 } else {
+                	// my clock does not contain a vector matching
+                	// the one in the foreign clock, include it in mine.
                    stamp.put (wknm, (VectorClock)other.stamp.get(wknm));
                 }
              }

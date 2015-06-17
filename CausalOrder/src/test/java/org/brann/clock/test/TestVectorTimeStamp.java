@@ -183,8 +183,110 @@ public class TestVectorTimeStamp {
 		
 		// p3 now can receive p2's message - it is in order
 		assertTrue(p3.inCausalOrder(p2p3));
+		// checks that it is in order, then merges the foreign and local clocks
+		p3.mergeLocal(p2p3);
+		p3.mergeOther(p2p3);
+		p3.tick();
 		
-		
+//repeat to have pre-loaded timestamps		
+		// p1 sends to p3:
+				// send copy of p1 clock on message
+				// then insert a foreign vector for p3 in p1's clock
+				// tick p1
+				p1p3 = new VectorTimeStamp(p1);
+				p1.insertClockFor("p3");
+				p1.tick();
+								
+				
+				// p1 sends to p2:
+				// send copy of p1 clock on message
+				// then insert a foreign vector for p2 in p1's clock
+				// tick p1
+				p1p2 = new VectorTimeStamp(p1);
+				p1.insertClockFor("p2");
+				p1.tick();
+				
+				// p2 receives p1's message:
+				// checks that it is in order, then merges the foreign and local clocks
+				assertTrue(p2.inCausalOrder(p1p2));
+				p2.mergeLocal(p1p2);
+				p2.mergeOther(p1p2);
+				p2.tick();
+				
+				// p2 sends to p3:
+				// send copy of p2 clock on message
+				// then insert a foreign vector for p3 in p2's clock
+				// tick p2
+				p2p3 = new VectorTimeStamp(p2);
+				p2.insertClockFor("p3");
+				p2.tick();
+				
+				// p3 receives p2's message - out of order
+				assertFalse(p3.inCausalOrder(p2p3));
+				
+				// p3 receives p1's message:
+				// checks that it is in order, then merges the foreign and local clocks
+				assertTrue(p3.inCausalOrder(p1p3));
+				p3.mergeLocal(p1p3);
+				p3.mergeOther(p1p3);
+				p3.tick();
+				
+				// p3 now can receive p2's message - it is in order
+				assertTrue(p3.inCausalOrder(p2p3));
+				// checks that it is in order, then merges the foreign and local clocks
+				p3.mergeLocal(p2p3);
+				p3.mergeOther(p2p3);
+				p3.tick();
+				
+				//repeat to have pre-loaded timestamps		
+				// p1 sends to p3:
+						// send copy of p1 clock on message
+						// then insert a foreign vector for p3 in p1's clock
+						// tick p1
+						p1p3 = new VectorTimeStamp(p1);
+						p1.insertClockFor("p3");
+						p1.tick();
+										
+						
+						// p1 sends to p2:
+						// send copy of p1 clock on message
+						// then insert a foreign vector for p2 in p1's clock
+						// tick p1
+						p1p2 = new VectorTimeStamp(p1);
+						p1.insertClockFor("p2");
+						p1.tick();
+						
+						// p2 receives p1's message:
+						// checks that it is in order, then merges the foreign and local clocks
+						assertTrue(p2.inCausalOrder(p1p2));
+						p2.mergeLocal(p1p2);
+						p2.mergeOther(p1p2);
+						p2.tick();
+						
+						// p2 sends to p3:
+						// send copy of p2 clock on message
+						// then insert a foreign vector for p3 in p2's clock
+						// tick p2
+						p2p3 = new VectorTimeStamp(p2);
+						p2.insertClockFor("p3");
+						p2.tick();
+						
+						// p3 receives p2's message - out of order
+						assertFalse(p3.inCausalOrder(p2p3));
+						
+						// p3 receives p1's message:
+						// checks that it is in order, then merges the foreign and local clocks
+						assertTrue(p3.inCausalOrder(p1p3));
+						p3.mergeLocal(p1p3);
+						p3.mergeOther(p1p3);
+						p3.tick();
+						
+						// p3 now can receive p2's message - it is in order
+						assertTrue(p3.inCausalOrder(p2p3));
+						// checks that it is in order, then merges the foreign and local clocks
+						p3.mergeLocal(p2p3);
+						p3.mergeOther(p2p3);
+						p3.tick();
 		
 	}
 
