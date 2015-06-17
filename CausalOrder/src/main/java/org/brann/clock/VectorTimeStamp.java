@@ -2,7 +2,6 @@ package org.brann.clock;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Iterator;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.StringWriter;
@@ -28,7 +27,7 @@ public class VectorTimeStamp implements Serializable {
 	/**
 	 * produce JSON in the argument generator from this object
 	 * does not write start or end object (must be managed by caller)
-	 * @param jg
+	 * @param jg - the JSON Generator class that will produce the output
 	 * @throws IOException 
 	 * @throws JsonGenerationException 
 	 */
@@ -49,8 +48,7 @@ public class VectorTimeStamp implements Serializable {
         	stamp.get(clockOwner).toJson(jg);
         	
         	jg.writeEndObject();
-        }
-		
+        }		
 		jg.writeEndArray();
 	}
 	
@@ -78,30 +76,11 @@ public class VectorTimeStamp implements Serializable {
 			jg.flush();
 			jg.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}    	
 
     	
     	return sw.toString();
-
-    	
-/*        StringBuffer val = new StringBuffer();
-
-        val.append(owner);
-        val.append(NAME_SEP);
-        val.append(myclock.toString());
-        
-        for (Iterator<String> it = stamp.keySet().iterator();
-        		it.hasNext();) {
-        	String clockOwner = it.next();
-        	val.append(STAMP_SEP);
-        	val.append(clockOwner);
-        	val.append(NAME_SEP);
-        	val.append(stamp.get(clockOwner));
-        }
-        
-        return val.toString(); */
     }
 
     /**
@@ -117,15 +96,11 @@ public class VectorTimeStamp implements Serializable {
         
         VectorClock receivedClock = received.stamp.get(owner);
         
-//        System.out.println("Comparing MY clock:\n" + this + "\n\nwith RECEIVED clock:\n" + received);
-        
         if (receivedClock != null) {
             if (!(receivedClock.lessThan(myclock))) {
-  //              System.out.println("\n RECEIVED CLOCK NOT LESS THAN MY CLOCK!");
                 return false;
             }
         }
-//        System.out.println("\n RECEIVED CLOCK IN ORDER (LESS THAN MY CLOCK)");
         return true;
     }
 
@@ -178,16 +153,13 @@ public class VectorTimeStamp implements Serializable {
     */
     public synchronized void mergeOther(VectorTimeStamp other ) {
 
-        String wknm;
+        ;
 
-        for (Iterator<String> otherIt = other.stamp.keySet().iterator();
-             otherIt.hasNext();
-             ) {
-             wknm = otherIt.next();
-
+        for (String wknm : other.stamp.keySet()) {
+             
              if (wknm.compareTo(owner) != 0) {
                 if (stamp.containsKey(wknm)) {
-                    ((VectorClock)stamp.get(wknm)).merge((VectorClock)other.stamp.get(wknm));
+                    stamp.get(wknm).merge(other.stamp.get(wknm));
                         // received clock for a process is less than my own - do nothing
                 } else {
                    stamp.put (wknm, (VectorClock)other.stamp.get(wknm));
@@ -223,16 +195,13 @@ public class VectorTimeStamp implements Serializable {
             myclock = (VectorClock)source.myclock.clone();
             stamp = new HashMap<String, VectorClock>();
             synchronized (source.stamp) {
-                for (Iterator<String> it = source.stamp.keySet().iterator();
-                     it.hasNext();) {
-                         
-                     String key = it.next();
-                     stamp.put(key, ((VectorClock)(source.stamp.get(key)).clone()));
+                for (String key : source.stamp.keySet()) {
+                	stamp.put(key, ((VectorClock)(source.stamp.get(key)).clone()));
                 }                     
             }
     }
     
-    protected void fromJson(JsonParser jp) throws JsonParseException, IOException {
+    protected void fromJson(JsonParser jp) throws IOException {
     	
 		while (jp.nextToken() != JsonToken.END_OBJECT) { // first pass moves past start of object
 
